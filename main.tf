@@ -13,6 +13,7 @@ resource "aws_instance" "terra" {
 	subnet_id = "${aws_subnet.public-subnet-in-us-east-1.id}"
 	associate_public_ip_address = true
 	source_dest_check = false	
+}
 
 output "public_ip" {
 	value = "${aws_instance.terra.public_ip}"
