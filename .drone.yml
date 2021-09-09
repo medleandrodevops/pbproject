@@ -6,7 +6,7 @@ name: terraform
 steps:
       
 - name: initialize aws plugin for terraform
-  image: mateusmuller2/ansibleandterraform:latest
+  image: medleandro/infra:latest
   environment:
     AWS_ACCESS_KEY_ID:
       from_secret: aws_key_id
@@ -16,11 +16,11 @@ steps:
   - terraform init
   
 - name: create aws infra
-  image: mateusmuller2/ansibleandterraform:latest
+  image: medleandro/infra:latest
   environment:
     AWS_ACCESS_KEY_ID:
-      from_secret: aws_access
+      from_secret: aws_key_id
     AWS_SECRET_ACCESS_KEY:
-      from_secret: aws_secret
+      from_secret: aws_secret_access_key
   commands:
   - terraform apply -auto-approve
