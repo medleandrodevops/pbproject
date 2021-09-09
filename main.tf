@@ -12,18 +12,7 @@ resource "aws_instance" "terra" {
 	vpc_security_group_ids = ["${aws_security_group.terra.id}"]
 	subnet_id = "${aws_subnet.public-subnet-in-us-east-1.id}"
 	associate_public_ip_address = true
-	source_dest_check = false
-
-	connection {
-		type = "ssh"
-		host = "${aws_instance.terra.public_ip}"
-		user = "ubuntu"
-		port = "22"
-		private_key = "${file("/home/amanara/terraform/ssh/terraform.pem")}"
-		agent = true
-	}
-
-	
+	source_dest_check = false	
 
 output "public_ip" {
 	value = "${aws_instance.terra.public_ip}"
