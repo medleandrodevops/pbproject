@@ -1,0 +1,26 @@
+---
+kind: pipeline
+type: docker
+name: terraform
+
+steps:
+      
+- name: initialize aws plugin for terraform
+  image: mateusmuller2/ansibleandterraform:latest
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: aws_key_id
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: aws_secret_access_key
+  commands:
+  - terraform init
+  
+- name: create aws infra
+  image: mateusmuller2/ansibleandterraform:latest
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: aws_access
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: aws_secret
+  commands:
+  - terraform apply -auto-approve
